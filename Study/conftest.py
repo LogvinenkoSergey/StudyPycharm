@@ -10,6 +10,7 @@ def pytest_addoption(parser):
     parser.addoption('--language', action='store', default=None, help="Say language name to select")
 
 
+
 @pytest.fixture(scope="function")
 def browser(request):
     # проверяем какой язык и браузер (если есть)
