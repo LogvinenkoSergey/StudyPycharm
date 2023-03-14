@@ -1,17 +1,23 @@
 import pytest
 from selenium import webdriver
-from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
 
+
+# Описываем, что ключ language обязателен для запуска данного теста
+def pytest_addoption(parser):
+    parser.addoption('--language', action='store', default=None,
+                     help="Choose language please")
+
+# Описываем, фикстурув которой будем открывать браузер с учетом языка, введенного пользователем
 @pytest.fixture(scope="function")
-def browser():
-    print("\nstart browser for test..")
-    browser = webdriver.Chrome()
+def browser(request):
+    print("\nstart chrome browser for test..")
+    # Получаем значение параметра language из командной строки
+    user_language = request.config.getoption("language")
+    options = Options()
+    # Запуск браузера с указанным языком пользователя
+    options.add_experimental_option('prefs', {'intl.accept_languages': user_language})
+    browser = webdriver.Chrome(options=options)
     yield browser
     print("\nquit browser..")
     browser.quit()
-
-@pytest.mark.parametrize('language', ["ru", "en-gb"])
-def test_guest_should_see_login_link(browser, language):
-    link = f"http://selenium1py.pythonanywhere.com/{language}/"
-    browser.get(link)
-    browser.find_element(By.CSS_SELECTOR, "#login_link")
