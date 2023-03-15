@@ -25,9 +25,9 @@ def test_guest_should_see_login_link(browser, lexus):
     browser.implicitly_wait(35)
     browser.find_element(By.ID, "ember33").click()
     input1 = browser.find_element(By.ID, "id_login_email")
-    input1.send_keys("s.logvinenko@quality-lab.ru")
+    input1.send_keys("ххххххххххх@ххххх.ru")
     input2 = browser.find_element(By.ID, "id_login_password")
-    input2.send_keys("1q2w3e4r5t6y")
+    input2.send_keys("ххххххххххх")
     browser.find_element(By.CLASS_NAME, "sign-form__btn.button_with-loader").click()
 
     input3 = browser.find_element(By.XPATH, '/html/body/main/div[1]/div[2]/div/div[2]/div[1]/div/article/div/div/div[2]/div/section/div/div[1]/div[2]/div/div/div/textarea')
